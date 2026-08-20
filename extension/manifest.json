@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "小镇做题家",
-  "version": "0.1.0",
-  "description": "截图识别题目并给出可靠答案。",
+  "version": "0.1.1",
+  "description": "截图识别题目，提供解题思路与参考答案。",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["https://api.boringmax.com/countryboy/*"],
   "background": {

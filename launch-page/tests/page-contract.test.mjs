@@ -63,3 +63,13 @@ test('卷字 accelerates on hover and coasts to a stop after pointer leave', asy
   assert.match(script, /pointerleave/);
   assert.match(script, /requestAnimationFrame/);
 });
+
+test('launch page exposes a Chrome Web Store privacy policy', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const privacy = await readFile(new URL('../privacy.html', import.meta.url), 'utf8');
+
+  assert.match(html, /href="privacy\.html"/);
+  assert.match(privacy, /api\.boringmax\.com/);
+  assert.match(privacy, /Google Gemini API/);
+  assert.match(privacy, /不会出售/);
+});
