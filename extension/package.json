@@ -1,0 +1,14 @@
+{
+  "name": "page-lens-ai-extension",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "katex": "0.16.22"
+  }
+}

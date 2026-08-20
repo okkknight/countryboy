@@ -1,0 +1,5 @@
+@countryboy path /countryboy/*
+handle @countryboy {
+	uri strip_prefix /countryboy
+	reverse_proxy 127.0.0.1:8094
+}

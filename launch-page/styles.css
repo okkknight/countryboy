@@ -1,0 +1,62 @@
+:root { --ink:#101010; --cream:#fff9e9; --yellow:#ffe44e; --red:#ff4136; --blue:#6dd9ff; --green:#b7ed65; --max:1180px; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; color:var(--ink); background:var(--cream); font-family:Impact, Haettenschweiler, "Arial Narrow Bold", "PingFang SC", "Microsoft YaHei", sans-serif; }
+a { color:inherit; text-decoration:none; }
+.shell { width:min(var(--max), calc(100% - 48px)); margin:auto; }
+
+.topbar { min-height:82px; display:flex; align-items:center; gap:25px; border-bottom:3px solid var(--ink); }
+.logo { display:flex; align-items:center; gap:9px; font:900 22px/1 "PingFang SC", sans-serif; letter-spacing:-.07em; white-space:nowrap; }
+.logo span { display:grid; place-items:center; width:37px; height:37px; color:#fff; background:var(--ink); transform:rotate(-7deg); font-family:Impact, sans-serif; }
+.logo sup { color:var(--red); font-size:11px; }
+.topline { margin:0 auto; font:14px/1.3 "Kaiti SC", KaiTi, serif; transform:rotate(-1deg); }
+.top-install { padding:10px 14px; color:#fff; background:var(--red); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink); font:800 13px/1 "PingFang SC", sans-serif; transition:.16s ease; }
+.top-install:hover { transform:translate(3px,3px) rotate(2deg); box-shadow:1px 1px 0 var(--ink); }
+
+.hero { display:grid; grid-template-columns:1fr .86fr; min-height:615px; gap:40px; align-items:center; position:relative; padding:62px 0 70px; }
+.hero-copy { position:relative; z-index:1; }
+.eyebrow, .section-title>p, .manifesto-head>p { margin:0 0 13px; color:var(--red); font:700 19px/1.2 "Kaiti SC", KaiTi, serif; }
+.eyebrow span { display:inline-block; width:12px; height:12px; margin-right:9px; background:var(--red); transform:rotate(45deg); }
+h1,h2,h3,p { margin-top:0; }
+.hero h1 { margin:0; font-size:clamp(80px,10vw,142px); line-height:.77; letter-spacing:-.1em; text-transform:uppercase; }
+.hero-slogan { display:inline-block; margin:25px 0 0; padding:6px 12px 5px; color:#fff; background:var(--ink); font:900 clamp(30px,3.8vw,50px)/1 "PingFang SC", sans-serif; letter-spacing:-.09em; transform:rotate(-2deg); }
+.hero-description { margin:29px 0 0; font:19px/1.7 "PingFang SC", sans-serif; letter-spacing:-.04em; }
+.hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:22px; margin-top:29px; }
+.main-button { display:inline-flex; align-items:center; gap:25px; padding:17px 20px 16px 24px; color:var(--ink); background:var(--yellow); border:3px solid var(--ink); box-shadow:8px 8px 0 var(--red); font:900 18px/1 "PingFang SC", sans-serif; transition:transform .14s ease, box-shadow .14s ease, background .14s ease; }
+.main-button b { font-size:25px; line-height:.5; }
+.main-button:hover { background:var(--green); transform:translate(5px,5px) rotate(-1.5deg); box-shadow:3px 3px 0 var(--red); }
+.main-button:active { transform:translate(8px,8px); box-shadow:none; }
+.tiny-link { border-bottom:2px solid var(--ink); padding-bottom:3px; font:700 14px/1 "PingFang SC", sans-serif; transform:rotate(1deg); }
+.hero-footnote { margin:19px 0 0; color:#59544a; font:15px/1.4 "Kaiti SC", KaiTi, serif; }
+
+.hero-chaos { min-height:460px; position:relative; display:grid; place-items:center; }
+.juan-wrap { position:relative; z-index:1; width:min(100%,405px); cursor:grab; transition:transform .25s ease; }
+.juan-wrap img { width:100%; display:block; filter:drop-shadow(13px 14px 0 var(--ink)); animation: bob 4s ease-in-out infinite; }
+.juan-wrap i { position:absolute; right:-18px; bottom:-18px; display:grid; place-items:center; width:58px; height:58px; color:#fff; background:var(--red); border:3px solid var(--ink); border-radius:50%; font:900 28px/1 "Kaiti SC", KaiTi, serif; transform:rotate(15deg); }
+.juan-wrap:hover { cursor:grabbing; }
+.juan-wrap:hover img { animation:juan-fan .22s linear infinite; }
+.rank-card { position:absolute; z-index:2; top:25px; right:-4px; width:190px; padding:11px 13px; background:#fff; border:2px solid var(--ink); box-shadow:5px 5px 0 var(--blue); transform:rotate(5deg); font-family:"PingFang SC", sans-serif; }
+.rank-card p { margin:0; font-size:11px; font-weight:800; }.rank-card strong { display:block; margin:7px 0; font-size:16px; }.rank-card em { color:var(--red); font-size:28px; font-style:normal; }.rank-card span { display:block; border-top:1px solid var(--ink); padding-top:6px; font-size:11px; }.rank-card b { color:var(--red); }
+.red-scribble { position:absolute; z-index:3; margin:0; color:var(--red); font:700 23px/1.2 "Kaiti SC", KaiTi, serif; }.red-scribble.one { left:-16px; top:95px; transform:rotate(-11deg); }.red-scribble.two { right:-12px; bottom:56px; transform:rotate(8deg); }
+.fake-stamp { position:absolute; left:20px; bottom:14px; z-index:2; display:grid; place-items:center; width:92px; height:92px; color:var(--red); border:3px double var(--red); border-radius:50%; font:700 23px/1.05 "Kaiti SC", KaiTi, serif; text-align:center; transform:rotate(-15deg); }
+
+.quiz-section { padding:82px 0 88px; background:var(--ink); color:#fff; border-block:4px solid var(--ink); }
+.section-title { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; padding-bottom:26px; border-bottom:2px solid #fff; }.section-title>p { grid-column:1/-1; margin-bottom:-20px; color:var(--yellow); }.section-title h2,.manifesto-head h2,.final-call h2 { margin:0; font-size:clamp(48px,5.5vw,76px); line-height:.9; letter-spacing:-.1em; }.section-title>span { max-width:330px; padding-bottom:5px; color:#d4d4d4; font:18px/1.5 "Kaiti SC", KaiTi, serif; }
+.answer-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:23px 0 0; padding:0; list-style:none; counter-reset:answers; }.answer-cards li { min-height:280px; position:relative; padding:26px; color:var(--ink); background:#fff; border:3px solid #fff; transition:transform .18s ease, background .18s ease, box-shadow .18s ease; }.answer-cards li:nth-child(1){transform:rotate(-1deg);background:var(--yellow)}.answer-cards li:nth-child(2){transform:rotate(.6deg);background:#fff}.answer-cards li:nth-child(3){transform:rotate(-.5deg);background:var(--blue)}.answer-cards li:hover { z-index:2; background:var(--green); transform:translateY(-11px) rotate(0deg) !important; box-shadow:8px 9px 0 var(--red); }.answer-letter { display:grid; place-items:center; width:37px; height:37px; margin-bottom:31px; color:#fff; background:var(--ink); border-radius:50%; font:900 18px/1 "PingFang SC", sans-serif; }.answer-cards h3 { margin:0; font:900 25px/1 "PingFang SC", sans-serif; letter-spacing:-.07em; }.answer-cards p { margin:13px 0 0; font:15px/1.65 "PingFang SC", sans-serif; }.card-joke { display:block; margin-top:20px; color:var(--red); font:16px/1.35 "Kaiti SC", KaiTi, serif; }.copy-path { margin-top:16px; padding:8px 11px; color:#fff; background:var(--ink); border:0; cursor:pointer; font:800 13px/1 "PingFang SC", sans-serif; transition:.15s ease; }.copy-path:hover { color:var(--ink); background:var(--red); transform:rotate(-2deg); }#copy-status { min-height:19px; margin-top:8px!important; color:var(--red); font-family:"PingFang SC",sans-serif; font-size:12px!important; }code { padding:2px 5px; background:rgba(255,255,255,.58); font-family:ui-monospace,monospace; font-size:.88em; }
+
+.manifesto { display:grid; grid-template-columns:.85fr 1.15fr; gap:78px; padding:105px 0; }.manifesto-head>span { display:block; margin-top:22px; color:var(--red); font:20px/1.45 "Kaiti SC", KaiTi, serif; }.manifesto-notes { display:grid; gap:0; border-top:3px solid var(--ink); }.manifesto-notes article { position:relative; min-height:146px; padding:24px 55px 20px 74px; border-bottom:2px solid var(--ink); transition:background .18s ease, transform .18s ease; }.manifesto-notes article:hover { background:var(--yellow); transform:translateX(11px) rotate(.3deg); }.manifesto-notes span { position:absolute; top:23px; left:0; display:grid; place-items:center; width:48px; height:48px; color:#fff; background:var(--ink); border-radius:50%; font:18px/1 Impact,sans-serif; }.manifesto-notes h3 { margin:0; font:900 24px/1.1 "PingFang SC", sans-serif; letter-spacing:-.07em; }.manifesto-notes p { margin:11px 0 0; font:16px/1.5 "Kaiti SC", KaiTi, serif; }.manifesto-notes article::after { content:"↗"; position:absolute; right:10px; top:50%; color:var(--red); font:30px/1 serif; transform:translateY(-50%) rotate(9deg); }
+
+.final-call { overflow:hidden; color:#fff; background:var(--red); }.final-inner { position:relative; padding:83px 0 74px; }.final-inner::after { content:"卷"; position:absolute; right:-35px; bottom:-80px; color:rgba(255,228,78,.95); font:clamp(210px,30vw,440px)/1 Impact,"PingFang SC",sans-serif; transform:rotate(-14deg); }.final-inner>p,.final-inner>h2,.final-inner>a,.final-inner>small { position:relative; z-index:1; }.final-inner>p { margin:0 0 10px; font:21px/1.2 "Kaiti SC", KaiTi, serif; }.final-inner h2 { max-width:650px; }.main-button.light { margin-top:31px; background:#fff; box-shadow:8px 8px 0 var(--ink); }.main-button.light:hover { background:var(--yellow); box-shadow:3px 3px 0 var(--ink); }.final-inner small { display:block; margin-top:31px; font:14px/1 "Kaiti SC", KaiTi, serif; }.footer { display:flex; justify-content:space-between; gap:20px; padding:22px 0; font:14px/1 "Kaiti SC",KaiTi,serif; }
+.update-note { color:#9a968f; font-family:"Kaiti SC", KaiTi, "STKaiti", cursive; font-size:16px; transform:rotate(-1.5deg); }
+@keyframes bob { 0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(1deg)} }
+@keyframes juan-fan { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+@media(max-width:760px){ .shell{width:min(var(--max),calc(100% - 32px))}.topbar{min-height:69px;gap:12px}.logo{font-size:18px}.logo span{width:30px;height:30px}.topline{display:none}.top-install{margin-left:auto}.hero{grid-template-columns:1fr;gap:8px;padding:51px 0 55px;min-height:0}.hero h1{font-size:clamp(75px,23vw,112px)}.hero-description{font-size:17px}.hero-chaos{order:-1;min-height:325px}.juan-wrap{width:275px}.rank-card{top:10px;right:0;width:154px;transform:rotate(4deg) scale(.84);transform-origin:top right}.red-scribble.one{left:0;top:75px;font-size:18px}.red-scribble.two{right:0;bottom:8px;font-size:18px}.fake-stamp{bottom:0;left:8px;transform:rotate(-15deg) scale(.8)}.quiz-section{padding:58px 0 63px}.section-title{grid-template-columns:1fr;gap:16px;padding-bottom:20px}.section-title>p{margin-bottom:0}.section-title>span{font-size:16px}.answer-cards{grid-template-columns:1fr;gap:13px}.answer-cards li{min-height:0;padding:22px}.answer-letter{margin-bottom:22px}.manifesto{grid-template-columns:1fr;gap:46px;padding:67px 0}.manifesto-notes article{min-height:126px;padding-left:65px}.manifesto-notes h3{font-size:21px}.final-inner{padding:61px 0}.final-inner::after{right:-25px;bottom:-38px;font-size:250px}.footer{display:block;line-height:1.8}.footer span{display:block} }
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Chinese display type needs its own metrics: Impact's fallback line box crushes multi-line headings. */
+body { font-family:"PingFang SC", "Microsoft YaHei", Arial, sans-serif; }
+.hero h1 { font-family:"PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size:clamp(74px, 8.6vw, 126px); font-weight:950; line-height:1.02; letter-spacing:-.11em; }
+.section-title h2, .manifesto-head h2, .final-call h2 { font-family:"PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size:clamp(46px, 5vw, 70px); font-weight:950; line-height:1.08; letter-spacing:-.1em; }
+.answer-cards h3 { font-family:"PingFang SC", "Microsoft YaHei", Arial, sans-serif; line-height:1.22; }
+.manifesto-notes h3 { font-family:"PingFang SC", "Microsoft YaHei", Arial, sans-serif; line-height:1.28; }
+@media(max-width:760px) { .hero h1 { font-size:clamp(66px,20vw,96px); line-height:1.05; } }

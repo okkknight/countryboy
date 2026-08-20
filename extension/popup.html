@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小镇做题家</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main class="panel">
+    <div class="popup-brand"><span>卷</span>小镇做题家 <i>卷王在岗</i></div>
+    <section id="statusRow" class="status-row">
+      <span id="spinner" class="spinner" aria-hidden="true"></span>
+      <div>
+        <div id="headline" class="headline">卷王正在做题…</div>
+        <div id="subtext" class="subtext">题目已送达，马上开卷</div>
+      </div>
+    </section>
+    <div id="result" class="result" hidden></div>
+    <div id="actions" class="actions">
+      <button id="cancelButton" class="text-button">先不卷了</button>
+      <button id="restartButton" class="text-button" hidden>再做一题</button>
+    </div>
+  </main>
+  <script type="module" src="src/popup.js"></script>
+</body>
+</html>

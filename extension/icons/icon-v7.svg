@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="rainbow" x1="22" y1="20" x2="106" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f43f5e"/>
+      <stop offset=".22" stop-color="#f97316"/>
+      <stop offset=".42" stop-color="#eab308"/>
+      <stop offset=".6" stop-color="#22c55e"/>
+      <stop offset=".78" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <text
+    x="64"
+    y="91"
+    fill="url(#rainbow)"
+    stroke="#111827"
+    stroke-opacity=".18"
+    stroke-width="1.5"
+    paint-order="stroke fill"
+    font-family="Hiragino Sans GB, PingFang SC, sans-serif"
+    font-size="84"
+    font-weight="900"
+    text-anchor="middle"
+  >卷</text>
+</svg>

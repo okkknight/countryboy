@@ -1,0 +1,20 @@
+[Unit]
+Description=Countryboy question-solving API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=shipnow
+Group=shipnow
+WorkingDirectory=/opt/boringmax/countryboy/backend
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=/etc/countryboy/countryboy.env
+ExecStart=/opt/boringmax/countryboy/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8094 --proxy-headers
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

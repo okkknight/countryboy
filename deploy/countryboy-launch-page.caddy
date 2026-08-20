@@ -1,0 +1,8 @@
+redir /countryboy /countryboy/ 308
+
+@countryboyLaunch path /countryboy/*
+handle @countryboyLaunch {
+	uri strip_prefix /countryboy
+	root * /opt/boringmax/countryboy/site
+	file_server
+}
