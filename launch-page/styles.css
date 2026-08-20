@@ -31,10 +31,9 @@ h1,h2,h3,p { margin-top:0; }
 
 .hero-chaos { min-height:460px; position:relative; display:grid; place-items:center; }
 .juan-wrap { position:relative; z-index:1; width:min(100%,405px); cursor:grab; transition:transform .25s ease; }
-.juan-wrap img { width:100%; display:block; filter:drop-shadow(13px 14px 0 var(--ink)); animation: bob 4s ease-in-out infinite; }
+.juan-wrap img { width:100%; display:block; filter:drop-shadow(13px 14px 0 var(--ink)); transform-origin:center; will-change:transform; }
 .juan-wrap i { position:absolute; right:-18px; bottom:-18px; display:grid; place-items:center; width:58px; height:58px; color:#fff; background:var(--red); border:3px solid var(--ink); border-radius:50%; font:900 28px/1 "Kaiti SC", KaiTi, serif; transform:rotate(15deg); }
 .juan-wrap:hover { cursor:grabbing; }
-.juan-wrap:hover img { animation:juan-fan .22s linear infinite; }
 .rank-card { position:absolute; z-index:2; top:25px; right:-4px; width:190px; padding:11px 13px; background:#fff; border:2px solid var(--ink); box-shadow:5px 5px 0 var(--blue); transform:rotate(5deg); font-family:"PingFang SC", sans-serif; }
 .rank-card p { margin:0; font-size:11px; font-weight:800; }.rank-card strong { display:block; margin:7px 0; font-size:16px; }.rank-card em { color:var(--red); font-size:28px; font-style:normal; }.rank-card span { display:block; border-top:1px solid var(--ink); padding-top:6px; font-size:11px; }.rank-card b { color:var(--red); }
 .red-scribble { position:absolute; z-index:3; margin:0; color:var(--red); font:700 23px/1.2 "Kaiti SC", KaiTi, serif; }.red-scribble.one { left:-16px; top:95px; transform:rotate(-11deg); }.red-scribble.two { right:-12px; bottom:56px; transform:rotate(8deg); }

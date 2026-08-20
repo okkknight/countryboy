@@ -1,8 +1,9 @@
 @import url("vendor/katex/katex.min.css");
 :root { color-scheme: light; background:transparent; font-family:"PingFang SC", "Microsoft YaHei", sans-serif; }
 * { box-sizing:border-box; }
-body { width:370px; margin:0; overflow:hidden; color:#111; border:2px solid #111; border-radius:18px; background:#fff9e9; box-shadow:4px 5px 0 #ff4438; }
-.panel { min-height:174px; padding:13px 14px 12px; overflow:auto; background-color:#fff9e9; background-image:linear-gradient(90deg,rgba(17,17,17,.045) 1px,transparent 1px),linear-gradient(rgba(17,17,17,.035) 1px,transparent 1px); background-size:20px 20px; }
+body { width:370px; margin:0; color:#111; background:#fff9e9; }
+.panel { position:relative; min-height:174px; padding:18px 19px 17px; overflow:auto; background-color:#fff9e9; background-image:linear-gradient(90deg,rgba(17,17,17,.045) 1px,transparent 1px),linear-gradient(rgba(17,17,17,.035) 1px,transparent 1px); background-size:20px 20px; }
+.panel::before, .panel::after { content:""; position:absolute; pointer-events:none; }.panel::before { z-index:3; inset:4px 5px 5px 4px; border:2px solid #111; transform:rotate(-.25deg); }.panel::after { z-index:3; inset:7px 3px 3px 7px; border:1px solid rgba(17,17,17,.72); transform:rotate(.18deg); }
 .popup-brand { display:flex; align-items:center; gap:6px; padding-bottom:10px; color:inherit; border-bottom:2px solid #111; font-size:15px; font-weight:900; letter-spacing:-.06em; text-decoration:none; cursor:pointer; }.popup-brand:hover { color:#f04438; }
 .popup-brand>span { display:grid; place-items:center; width:24px; height:24px; color:#fff; background:#111; transform:rotate(-7deg); font:18px/1 "Kaiti SC", KaiTi, serif; }.popup-brand:hover>span { background:#f04438; transform:rotate(7deg); }
 .status-row { display:flex; align-items:flex-start; gap:11px; padding-top:14px; }.spinner { width:16px; height:16px; margin-top:2px; border:3px solid #111; border-top-color:#ff4438; border-radius:50%; animation:spin .5s linear infinite; flex:0 0 auto; }.spinner.done { width:12px; height:12px; margin:5px 2px 0; border:0; border-radius:50%; background:#ff4438; animation:none; }

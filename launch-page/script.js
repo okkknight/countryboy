@@ -11,3 +11,53 @@ if (copyButton && copyStatus) {
     }
   });
 }
+
+const juanWrap = document.querySelector('.juan-wrap');
+const juanImage = juanWrap?.querySelector('img');
+
+if (juanWrap && juanImage?.animate) {
+  const juanSpin = juanImage.animate(
+    [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }],
+    { duration: 220, iterations: Infinity, easing: 'linear' },
+  );
+  juanSpin.playbackRate = 0;
+
+  let speed = 0;
+  let targetSpeed = 0;
+  let previousTime = 0;
+  let animationFrame = null;
+
+  const startMotion = () => {
+    if (animationFrame !== null) return;
+    previousTime = performance.now();
+    animationFrame = requestAnimationFrame((timestamp) => updateMotion(timestamp));
+  };
+
+  const updateMotion = (timestamp) => {
+    const elapsed = Math.min(timestamp - previousTime, 100);
+    previousTime = timestamp;
+    const responseTime = targetSpeed > speed ? 75 : 650;
+    const blend = 1 - Math.exp(-elapsed / responseTime);
+    speed += (targetSpeed - speed) * blend;
+
+    if (targetSpeed === 0 && speed < 0.001) {
+      speed = 0;
+      juanSpin.playbackRate = 0;
+      animationFrame = null;
+      return;
+    }
+
+    juanSpin.playbackRate = speed;
+    animationFrame = requestAnimationFrame((nextTimestamp) => updateMotion(nextTimestamp));
+  };
+
+  juanWrap.addEventListener('pointerenter', () => {
+    targetSpeed = 1;
+    startMotion();
+  });
+
+  juanWrap.addEventListener('pointerleave', () => {
+    targetSpeed = 0;
+    startMotion();
+  });
+}

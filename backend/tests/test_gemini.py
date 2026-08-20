@@ -56,10 +56,12 @@ async def test_gemini_analyzer_sends_screenshot_and_returns_text():
                     'text': (
                         '你是一名严谨的做题助手。只依据截图中清晰可辨的内容识别题目，'
                         '题型可能是选择题、判断题、填空题、简答题或计算题。\n\n'
-                        '先判断截图是否包含完整且清晰可辨的题目。若题干、选项、条件或'
-                        '关键文字无法可靠识别，必须且只能返回：'
-                        '「未能识别出清晰、完整的题目，请重新截图后再试。」不要猜测、'
-                        '补全或强行作答。\n\n'
+                        '先判断截图是否包含完整且清晰可辨的题目，以及作答所需信息是否齐全。'
+                        '题干、选项、图表、公式、条件、单位、问法或答案要求只要有一项被截断、'
+                        '模糊或缺失，就不要作答、不要猜测、不要补全。此时必须且只能按以下格式返回：\n'
+                        '无法作答：<简短说明缺失或看不清的关键内容>\n'
+                        '建议：<明确说明需要补截或拍清的区域，例如“请补全题干下半部分和全部选项”>\n\n'
+                        '只有题目完整、作答条件充分且答案可可靠核对时，才作答。\n\n'
                         '若能可靠识别，请逐题使用以下格式：\n'
                         '题目：<转写的题干，保留必要选项或条件>\n'
                         '题型：<题型>\n'
@@ -101,4 +103,34 @@ async def test_gemini_analyzer_retries_a_transient_service_unavailable_response(
     )
 
     assert result == '重试后拿到答案'
+    assert attempts == 2
+
+
+@pytest.mark.asyncio
+async def test_gemini_analyzer_retries_a_rate_limited_response():
+    attempts = 0
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal attempts
+        attempts += 1
+        if attempts == 1:
+            return httpx.Response(429, json={'error': {'message': 'Rate limited'}})
+        return httpx.Response(
+            200,
+            json={'candidates': [{'content': {'parts': [{'text': '限流恢复后拿到答案'}]}}]},
+        )
+
+    analyzer = analyzers.GeminiAnalyzer(
+        api_key='test-key',
+        transport=httpx.MockTransport(handler),
+    )
+
+    result = await analyzer.analyze(
+        image_bytes=b'jpeg-bytes',
+        mime_type='image/jpeg',
+        page_url='',
+        page_title='',
+    )
+
+    assert result == '限流恢复后拿到答案'
     assert attempts == 2

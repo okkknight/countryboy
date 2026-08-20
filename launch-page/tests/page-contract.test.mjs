@@ -6,7 +6,7 @@ test('launch page preserves core copy, download link, and install guide', async 
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
   assert.match(html, /小镇做题家，看谁先卷死谁。/);
-  assert.match(html, /href="downloads\/countryboy-extension\.zip"/);
+  assert.match(html, /href="downloads\/countryboy-extension\.zip(?:\?[^\"]*)?"/);
   assert.match(html, /chrome:\/\/extensions/);
   assert.match(html, /加载已解压的扩展程序/);
   assert.match(html, /id="install"/);
@@ -53,4 +53,13 @@ test('page describes only the actual screenshot question-solving workflow', asyn
   assert.doesNotMatch(html, /错题本/);
   assert.doesNotMatch(html, /同龄人进度对比/);
   assert.doesNotMatch(html, /自愿内卷免责声明/);
+});
+
+test('卷字 accelerates on hover and coasts to a stop after pointer leave', async () => {
+  const script = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+
+  assert.match(script, /juanSpin\.playbackRate/);
+  assert.match(script, /pointerenter/);
+  assert.match(script, /pointerleave/);
+  assert.match(script, /requestAnimationFrame/);
 });
