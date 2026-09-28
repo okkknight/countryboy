@@ -1,6 +1,10 @@
 # 小镇做题家
 
+应用代码和自制图标采用 [MIT 许可证](LICENSE)。扩展内打包的 KaTeX 及其字体保留 [上游 MIT 许可证](extension/vendor/katex/LICENSE)。其他第三方依赖遵循各自的许可证。
+
 一个本地加载的 Chrome Manifest V3 扩展 MVP：点击工具栏图标后，截取当前页面**可见区域**，上传到服务器，通过 `requestId` 查询 AI 分析结果，并在插件图标下方的小 popup 中展示。
+
+扩展会把当前可见页面的截图发送至配置的后端。请在使用前确认页面内容适合上传，并检查 `extension/src/config.js` 中的服务地址。
 
 ## 已实现
 
