@@ -2,15 +2,18 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-test('launch page preserves core copy, download link, and install guide', async () => {
+test('launch page prioritizes Chrome Web Store installation and keeps ZIP as a backup', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
   assert.match(html, /小镇做题家，看谁先卷死谁。/);
+  assert.match(html, /https:\/\/chromewebstore\.google\.com\/detail\/oaklibljpcpnkbhoegfjingcdebjkkjp/);
+  assert.match(html, /去 Chrome 商店，一键开卷/);
+  assert.match(html, /免解压、免开发者模式/);
   assert.match(html, /href="downloads\/countryboy-extension\.zip(?:\?[^\"]*)?"/);
+  assert.match(html, /商店进不去？走 ZIP 补考通道/);
   assert.match(html, /chrome:\/\/extensions/);
   assert.match(html, /加载已解压的扩展程序/);
   assert.match(html, /id="install"/);
-  assert.doesNotMatch(html, /Chrome Web Store/);
 });
 
 test('page has a no-JavaScript install path and optional copy helper', async () => {
