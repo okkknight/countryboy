@@ -2,15 +2,18 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-test('launch page preserves core copy, download link, and install guide', async () => {
+test('launch page prioritizes Chrome Web Store installation and keeps ZIP as a backup', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
   assert.match(html, /小镇做题家，看谁先卷死谁。/);
-  assert.match(html, /href="downloads\/countryboy-extension\.zip"/);
+  assert.match(html, /https:\/\/chromewebstore\.google\.com\/detail\/oaklibljpcpnkbhoegfjingcdebjkkjp/);
+  assert.match(html, /去 Chrome 商店，一键开卷/);
+  assert.match(html, /免解压、免开发者模式/);
+  assert.match(html, /href="downloads\/countryboy-extension\.zip(?:\?[^\"]*)?"/);
+  assert.match(html, /商店进不去？走 ZIP 补考通道/);
   assert.match(html, /chrome:\/\/extensions/);
   assert.match(html, /加载已解压的扩展程序/);
   assert.match(html, /id="install"/);
-  assert.doesNotMatch(html, /Chrome Web Store/);
 });
 
 test('page has a no-JavaScript install path and optional copy helper', async () => {
@@ -53,4 +56,23 @@ test('page describes only the actual screenshot question-solving workflow', asyn
   assert.doesNotMatch(html, /错题本/);
   assert.doesNotMatch(html, /同龄人进度对比/);
   assert.doesNotMatch(html, /自愿内卷免责声明/);
+});
+
+test('卷字 accelerates on hover and coasts to a stop after pointer leave', async () => {
+  const script = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+
+  assert.match(script, /juanSpin\.playbackRate/);
+  assert.match(script, /pointerenter/);
+  assert.match(script, /pointerleave/);
+  assert.match(script, /requestAnimationFrame/);
+});
+
+test('launch page exposes a Chrome Web Store privacy policy', async () => {
+  const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+  const privacy = await readFile(new URL('../privacy.html', import.meta.url), 'utf8');
+
+  assert.match(html, /href="privacy\.html"/);
+  assert.match(privacy, /api\.boringmax\.com/);
+  assert.match(privacy, /Google Gemini API/);
+  assert.match(privacy, /不会出售/);
 });

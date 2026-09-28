@@ -77,7 +77,9 @@ uvicorn app.main:app --host 127.0.0.1 --port 8000
 
 https://boringmax.com/countryboy/
 
-该页面提供 ZIP 下载和三步“加载已解压的扩展程序”说明。Chrome 不允许普通 macOS / Windows 用户从自托管网站自动安装扩展，因此仍需在 `chrome://extensions` 手动开启开发者模式并选择解压后的文件夹。
+也可以从 [Chrome 网上应用店](https://chromewebstore.google.com/detail/oaklibljpcpnkbhoegfjingcdebjkkjp)安装。
+
+上述介绍页面还提供 ZIP 下载和三步“加载已解压的扩展程序”说明。选择 ZIP 安装时，需在 `chrome://extensions` 手动开启开发者模式并选择解压后的文件夹。
 
 ## 3. 换成你的服务器
 

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="800" viewBox="0 0 1280 800">
+  <defs><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#111" stroke-opacity=".07"/></pattern></defs>
+  <rect width="1280" height="800" fill="#fff9ea"/>
+  <image xlink:href="juan-paper-collage-v2.png" x="-120" y="-175" width="730" height="770" preserveAspectRatio="xMidYMid slice" opacity=".98"/>
+  <rect width="1280" height="800" fill="url(#grid)"/>
+  <rect x="46" y="46" width="1188" height="706" fill="#fffdf7" stroke="#111" stroke-width="4"/>
+  <rect x="46" y="46" width="1188" height="58" fill="#111"/>
+  <circle cx="79" cy="75" r="9" fill="#ff4940"/><circle cx="106" cy="75" r="9" fill="#ffe34d"/><circle cx="133" cy="75" r="9" fill="#a9dc62"/>
+  <rect x="184" y="62" width="608" height="26" rx="13" fill="#fff9ea" opacity=".98"/>
+  <text x="210" y="80" font-family="Arial, PingFang SC, sans-serif" font-size="14" fill="#5d5951">题目页面 · 点击右上角图标开始做题</text>
+  <text x="94" y="164" font-family="Arial, PingFang SC, sans-serif" font-size="27" font-weight="900" fill="#111">2015 高考重庆卷 · 集合</text>
+  <line x1="94" y1="185" x2="690" y2="185" stroke="#111" stroke-width="3"/>
+  <text x="94" y="240" font-family="Arial, PingFang SC, sans-serif" font-size="25" fill="#111">已知集合 A = {1, 2, 3}，B = {2, 3}，则（ ）</text>
+  <text x="112" y="294" font-family="Arial, PingFang SC, sans-serif" font-size="23" fill="#111">A. A = B</text><text x="112" y="340" font-family="Arial, PingFang SC, sans-serif" font-size="23" fill="#111">B. A ∩ B = ∅</text><text x="112" y="386" font-family="Arial, PingFang SC, sans-serif" font-size="23" fill="#111">C. A ⊊ B</text><text x="112" y="432" font-family="Arial, PingFang SC, sans-serif" font-size="23" fill="#111">D. B ⊊ A</text>
+  <text x="96" y="570" font-family="STKaiti, KaiTi, serif" font-size="34" font-weight="700" fill="#ff4940">截图一下，卷王开工。</text>
+  <text x="96" y="614" font-family="STKaiti, KaiTi, serif" font-size="21" fill="#55504a">题目一来，参考答案和解析随后到。</text>
+  <path d="M98 632C293 647 479 629 641 638" fill="none" stroke="#111" stroke-width="3"/>
+  <circle cx="650" cy="606" r="38" fill="#ff4940" stroke="#111" stroke-width="4"/>
+  <text x="628" y="625" font-family="STKaiti, KaiTi, serif" font-size="39" font-weight="700" fill="#fff">卷</text>
+  <rect x="756" y="126" width="423" height="556" fill="#fff9ea" stroke="#111" stroke-width="4"/>
+  <rect x="762" y="133" width="411" height="542" fill="none" stroke="#111" stroke-width="2" opacity=".72"/>
+  <rect x="781" y="151" width="43" height="43" fill="#111" transform="rotate(-7 802 172)"/><text x="791" y="182" font-family="STKaiti, KaiTi, serif" font-size="31" fill="#fff">卷</text><text x="837" y="182" font-family="Arial, PingFang SC, sans-serif" font-size="25" font-weight="900" fill="#111">小镇做题家</text>
+  <line x1="781" y1="211" x2="1148" y2="211" stroke="#111" stroke-width="3"/><circle cx="800" cy="258" r="12" fill="#ff4940"/><text x="829" y="268" font-family="Arial, PingFang SC, sans-serif" font-size="27" font-weight="900" fill="#111">这题卷完了</text>
+  <rect x="781" y="294" width="367" height="284" fill="#fff" stroke="#111" stroke-width="2"/><text x="803" y="329" font-family="Arial, PingFang SC, sans-serif" font-size="20" font-weight="900" fill="#111">答案</text><text x="813" y="367" font-family="Arial, PingFang SC, sans-serif" font-size="18" fill="#111">• 题型：选择题</text><text x="813" y="403" font-family="Arial, PingFang SC, sans-serif" font-size="18" fill="#111">• 答案：<tspan font-weight="900">D. B ⊊ A</tspan></text><rect x="803" y="426" width="5" height="105" fill="#ff4940"/><text x="820" y="447" font-family="Arial, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#111">解析</text><text x="820" y="482" font-family="STKaiti, KaiTi, serif" font-size="17" fill="#5d5951">B 中元素 2、3 都在 A 中，</text><text x="820" y="512" font-family="STKaiti, KaiTi, serif" font-size="17" fill="#5d5951">且 A 还有元素 1，所以 B 是 A 的真子集。</text>
+  <rect x="990" y="607" width="158" height="47" fill="#ffe34d" stroke="#111" stroke-width="2"/><text x="1014" y="638" font-family="Arial, PingFang SC, sans-serif" font-size="19" font-weight="900" fill="#111">再做一题</text>
+  <text x="770" y="724" font-family="STKaiti, KaiTi, serif" font-size="19" fill="#ff4940">会不会不重要，气势先拉满。</text>
+</svg>

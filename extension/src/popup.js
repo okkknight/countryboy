@@ -1,6 +1,7 @@
 import { POLL_INTERVAL_MS } from './config.js';
 import katex from '../vendor/katex/katex.mjs';
 import { splitMathSegments } from './math-format.js';
+import { parseMarkdownBlocks } from './markdown-format.js';
 
 const spinner = document.querySelector('#spinner');
 const headline = document.querySelector('#headline');
@@ -15,15 +16,44 @@ let currentState = null;
 
 function renderResultText(text) {
   result.replaceChildren();
+  for (const block of parseMarkdownBlocks(text)) {
+    let element;
+    if (block.type === 'heading') {
+      element = document.createElement(`h${block.level}`);
+      element.className = 'result-heading';
+      appendMarkdownInline(element, block.text);
+    } else if (block.type === 'list') {
+      element = document.createElement(block.ordered ? 'ol' : 'ul');
+      element.className = 'result-list';
+      for (const itemText of block.items) {
+        const item = document.createElement('li');
+        appendMarkdownInline(item, itemText);
+        element.append(item);
+      }
+    } else if (block.type === 'quote') {
+      element = document.createElement('blockquote');
+      element.className = 'result-quote';
+      appendMarkdownInline(element, block.text);
+    } else if (block.type === 'code') {
+      element = document.createElement('pre');
+      element.className = 'result-code-block';
+      element.textContent = block.text;
+    } else {
+      element = document.createElement('p');
+      element.className = 'result-paragraph';
+      appendMarkdownInline(element, block.text);
+    }
+    result.append(element);
+  }
+}
+
+function appendMarkdownInline(container, text) {
   const lines = String(text).split('\n');
-
-  for (const line of lines) {
-    const row = document.createElement('div');
-    row.className = 'result-line';
-
+  for (const [index, line] of lines.entries()) {
+    if (index > 0) container.append(document.createElement('br'));
     for (const segment of splitMathSegments(line)) {
       if (segment.type === 'text') {
-        row.append(document.createTextNode(segment.value));
+        appendTextFormatting(container, segment.value);
         continue;
       }
 
@@ -34,10 +64,27 @@ function renderResultText(text) {
       } catch {
         formula.textContent = `$${segment.value}$`;
       }
-      row.append(formula);
+      container.append(formula);
     }
-    result.append(row);
   }
+}
+
+function appendTextFormatting(container, text) {
+  const inlinePattern = /(\*\*[^*\n]+?\*\*|__[^_\n]+?__|`[^`\n]+?`|\*[^*\n]+?\*|_[^_\n]+?_)/g;
+  let cursor = 0;
+
+  for (const match of text.matchAll(inlinePattern)) {
+    if (match.index > cursor) container.append(document.createTextNode(text.slice(cursor, match.index)));
+    const value = match[0];
+    const markerLength = value.startsWith('**') || value.startsWith('__') ? 2 : 1;
+    const tagName = value.startsWith('`') ? 'code' : value.startsWith('*') || value.startsWith('_') ? (markerLength === 2 ? 'strong' : 'em') : 'span';
+    const element = document.createElement(tagName);
+    element.textContent = value.slice(markerLength, -markerLength);
+    container.append(element);
+    cursor = match.index + value.length;
+  }
+
+  if (cursor < text.length) container.append(document.createTextNode(text.slice(cursor)));
 }
 
 function stopPolling() {
