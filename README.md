@@ -1,141 +1,43 @@
 # 小镇做题家
 
-应用代码和自制图标采用 [MIT 许可证](LICENSE)。扩展内打包的 KaTeX 及其字体保留 [上游 MIT 许可证](extension/vendor/katex/LICENSE)。其他第三方依赖遵循各自的许可证。
+小镇做题家把“看到题、截个图、去问 AI”收成 Chrome 工具栏里的一个按钮。
 
-一个本地加载的 Chrome Manifest V3 扩展 MVP：点击工具栏图标后，截取当前页面**可见区域**，上传到服务器，通过 `requestId` 查询 AI 分析结果，并在插件图标下方的小 popup 中展示。
+打开题目，点一下“卷”，它只截取当前可见区域，并在浏览器弹窗里返回题目转写、题型、参考答案和简短解析。选择、判断、填空、简答和计算题都可以直接试；题干没截全或图太糊时，它会明确告诉你需要补什么。
 
-扩展会把当前可见页面的截图发送至配置的后端。请在使用前确认页面内容适合上传，并检查 `extension/src/config.js` 中的服务地址。
+[从 Chrome 网上应用店安装](https://chromewebstore.google.com/detail/oaklibljpcpnkbhoegfjingcdebjkkjp) · [查看介绍与 ZIP 手动安装](https://boringmax.com/countryboy/)
 
-## 已实现
+![小镇做题家的题目与解答界面示例](store-assets/store-screenshot-1280x800.png)
 
-- Chrome 原生 action popup，不向网页注入 UI。
-- 点击后自动截图并提交。
-- 客户端生成唯一 `requestId`。
-- 请求按 Chrome Tab 隔离。
-- 同一 Tab + 同一 URL 重复打开 popup 时复用未完成请求，不重复截图/提交。
-- popup 打开期间按 `requestId` 轮询；关闭后停止轮询，重新打开后继续。
-- “取消当前请求”和“重新分析”。
-- 旧请求响应无法覆盖新请求。
-- FastAPI 参考后端，支持提交、查询、取消和幂等 `requestId`。
-- 默认 Mock AI，不需要任何模型 Key 就能跑完整流程。
+它适合卡住时迅速换个思路，也适合做完后快速核对。整个过程留在当前标签页，题目不需要手动搬运。
 
-## 目录
+## 使用方式
 
-```text
-page-lens-ai/
-├── extension/                  # 可直接 Load unpacked 的 Chrome 扩展
-├── backend/                    # FastAPI 参考服务
-├── docs/CODEX_HANDOFF.md       # 给 Codex 的后续开发说明
-├── docs/superpowers/specs/     # 完整设计规格
-├── docs/superpowers/plans/     # 实现计划
-└── scripts/verify.sh           # 一键验证
-```
+1. 打开题目，让完整题干出现在当前窗口里。
+2. 点击扩展图标。它只会在这一次点击时截取当前标签页的可见区域。
+3. 等弹窗给出转写、题型、参考答案和解析；关掉再打开，刚才的结果还在，也可以取消重做。
 
-## 1. 启动参考后端
+扩展会把截图、页面标题和地址发送到配置的后端。数据处理说明见[隐私政策](https://boringmax.com/countryboy/privacy.html)。
 
-要求 Python 3.11+。
+## 从源码运行
+
+仓库包含 Chrome Manifest V3 扩展和 FastAPI 参考后端。需要 Python 3.11+；不配置 Gemini 密钥时，后端用 MockAnalyzer 返回示例结果，可用来检查截图上传和轮询流程。
 
 ```bash
 cd backend
 python3 -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-浏览器访问 `http://127.0.0.1:8000/health` 应返回：
+然后在 `extension/src/config.js` 设置本地后端地址，并同步修改 `extension/manifest.json` 的 `host_permissions`。打开 `chrome://extensions`，开启开发者模式，选择“加载已解压的扩展程序”，加载仓库里的 `extension/` 目录。
 
-```json
-{"status":"ok"}
-```
+要让后端真正分析题目，在 `backend/.env` 中设置 `GEMINI_API_KEY`；配置示例见 [`backend/.env.example`](backend/.env.example)。密钥只放后端，不要写进扩展。部署到公网时还需要为 API 加访问控制。
 
-未配置 Gemini 时，`MockAnalyzer` 会稍等片刻后返回模拟结果，目的是先验证完整插件链路。
+参考后端把任务放在内存里，重启后会清空。扩展只截可见区域，不读取整页 DOM。
 
-## 2. 加载 Chrome 扩展
+开发与验证命令见 [`scripts/verify.sh`](scripts/verify.sh)，实现说明见 [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md)。
 
-1. 打开 `chrome://extensions`
-2. 开启“开发者模式”
-3. 点击“加载已解压的扩展程序 / Load unpacked”
-4. 选择本工程中的 `extension/` 目录
-5. 将“小镇做题家”固定到浏览器工具栏
-6. 打开任意网页并点击插件图标
+## 许可
 
-正常流程：
-
-```text
-点击插件
-→ popup 显示“正在理解当前页面…”
-→ 截取当前可见区域
-→ POST /api/v1/analyses
-→ popup 按 requestId 轮询
-→ 原地显示结果
-```
-
-## 下载与安装页面
-
-公开介绍、下载和安装引导位于：
-
-https://boringmax.com/countryboy/
-
-也可以从 [Chrome 网上应用店](https://chromewebstore.google.com/detail/oaklibljpcpnkbhoegfjingcdebjkkjp)安装。
-
-上述介绍页面还提供 ZIP 下载和三步“加载已解压的扩展程序”说明。选择 ZIP 安装时，需在 `chrome://extensions` 手动开启开发者模式并选择解压后的文件夹。
-
-## 3. 换成你的服务器
-
-需要同时修改两处：
-
-- `extension/src/config.js` 中的 `SERVER_ORIGIN`
-- `extension/manifest.json` 中的 `host_permissions`
-
-当前部署地址为 `https://api.boringmax.com/countryboy`。更换服务器时，需要同时修改两处为新的 HTTPS 地址，然后在 `chrome://extensions` 点击扩展的刷新按钮。
-
-生产环境应使用 HTTPS，并增加服务端认证。不要把 AI 模型 API Key 写进扩展代码。
-
-## 4. 使用 Gemini
-
-复制 `backend/.env.example` 为 `backend/.env`，并设置：
-
-```dotenv
-GEMINI_API_KEY=你的密钥
-GEMINI_MODEL=gemini-flash-latest
-```
-
-服务启动时会自动选择 Gemini。密钥仅保存在后端的本地 `.env`；不要写入扩展代码、前端配置或提交到 Git。
-
-## 5. 接入其他真实 AI
-
-后端 HTTP 契约已经和 AI Provider 解耦。实现：
-
-```python
-async def analyze(image_bytes, mime_type, page_url, page_title) -> str:
-    ...
-```
-
-然后在 `backend/app/main.py` 的 `create_app()` 中注入新的 Analyzer 即可。插件无需修改。
-
-具体接手说明见 [`docs/CODEX_HANDOFF.md`](docs/CODEX_HANDOFF.md)。
-
-## 6. 验证
-
-```bash
-./scripts/verify.sh
-```
-
-分别也可以运行：
-
-```bash
-npm --prefix extension test
-cd backend && PYTHONPATH=. python3 -m pytest -q
-```
-
-## 当前刻意保留的限制
-
-这是 MVP，不是生产后端：
-
-- 只截当前可见区域，不做整页长截图。
-- 不读取 DOM。
-- 后端 Job 只存在内存，重启即丢失。
-- 后端参考实现只适合单进程运行。
-- 没有账号、鉴权、历史记录和队列。
-- MockAnalyzer 不真正理解图片。
+项目代码采用 [MIT 许可证](LICENSE)。随扩展打包的第三方 KaTeX 素材保留其自身许可证，见 [`extension/vendor/katex/LICENSE`](extension/vendor/katex/LICENSE)。
